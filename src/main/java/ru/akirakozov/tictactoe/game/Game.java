@@ -69,7 +69,7 @@ public class Game {
             lastUserId = Optional.of(step.getUserId());
             stepNumber++;
             state = winChecker.getNewStatus(board, step.getX(), step.getY(), stepNumber);
-            eventListener.onMakeStep(id, new UserStepEvent(step, state));
+            eventListener.onMakeStep(id, new UserStepEvent(step, state, stepNumber));
             eventListener.onGameStatusChanged(id, getStatus());
         }
     }

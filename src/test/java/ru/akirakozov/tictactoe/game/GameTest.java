@@ -47,7 +47,7 @@ public class GameTest {
     public void makeStep() {
         UserStep step = new UserStep(USER_ID, 3, 5, Game.X);
         game.makeStep(step);
-        Assert.assertEquals(new UserStepEvent(step, GameState.ACTIVE), eventListener.getLastUserStep(GAME_ID));
+        Assert.assertEquals(new UserStepEvent(step, GameState.ACTIVE, 1), eventListener.getLastUserStep(GAME_ID));
         Assert.assertEquals(GameState.ACTIVE, eventListener.getLastGameStatus(GAME_ID).getState());
     }
 

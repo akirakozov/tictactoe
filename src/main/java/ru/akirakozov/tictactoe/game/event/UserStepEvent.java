@@ -13,12 +13,14 @@ public class UserStepEvent {
     public final int y;
     public final char symbol;
     public final GameState state;
+    public final int stepNumber;
 
-    public UserStepEvent(UserStep step, GameState state) {
+    public UserStepEvent(UserStep step, GameState state, int stepNumber) {
         this.x = step.getX();
         this.y = step.getY();
         this.symbol = step.getSymbol();
         this.state = state;
+        this.stepNumber = stepNumber;
     }
 
     @Override
@@ -29,11 +31,12 @@ public class UserStepEvent {
         return x == that.x &&
                 y == that.y &&
                 symbol == that.symbol &&
+                stepNumber == that.stepNumber &&
                 state == that.state;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, symbol, state);
+        return Objects.hash(x, y, symbol, state, stepNumber);
     }
 }

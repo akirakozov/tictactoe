@@ -3,6 +3,7 @@ var O = 'o'
 var curSymbol = X;
 var gameState;
 var wasUpdateAfterClick = true;
+var lastStepNumber = 0;
 
 function addClickCallback() {
     document.querySelector('#board').onclick = function(ev) {
@@ -22,7 +23,16 @@ function updateStatus(curSymbol, state) {
     $("#game-status").html("<p>" + text + "</p>");
 }
 
+function updateLastStepNumber(stepNumber) {
+    if (lastStepNumber + 1 == stepNumber) {
+        lastStepNumber = stepNumber;
+    } else {
+        window.location.reload(true);
+    }
+}
+
 function updateCell(message) {
+    updateLastStepNumber(message.stepNumber);
     curSymbol = message.symbol === X ? O : X;
     updateStatus(curSymbol, message.state);
     $('#board tr:eq(' + message.x + ') td:eq(' + message.y + ')').html(message.symbol);
@@ -37,13 +47,14 @@ function makeStep(x, y) {
     $.get( "/make-step?x=" + x + "&y=" + y + "&gameId=" + getGameId() + "&symbol=" + curSymbol);
 }
 
-function updateCurrentSymbol() {
-    curSymbol = $('#gameId').attr("step-number") % 2 === 0 ? X : O;
+function updateCurrentState() {
+    lastStepNumber = $('#gameId').attr("step-number");
+    curSymbol = lastStepNumber % 2 === 0 ? X : O;
     updateStatus(curSymbol, $('#gameId').attr("state"));
 }
 
 function onWindowLoad() {
     addClickCallback();
-    updateCurrentSymbol();
+    updateCurrentState();
     connect('/game/' + getGameId(), updateCell);
 }
