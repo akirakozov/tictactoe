@@ -66,6 +66,7 @@ public class Game {
         if (isValidStep(step)) {
             board[step.getX()][step.getY()] = step.getSymbol();
             lastStepTimestamp = Instant.now();
+            lastUserId = Optional.of(step.getUserId());
             stepNumber++;
             state = winChecker.getNewStatus(board, step.getX(), step.getY(), stepNumber);
             eventListener.onMakeStep(id, new UserStepEvent(step, state));
@@ -74,6 +75,11 @@ public class Game {
     }
 
     boolean isValidStep(UserStep step) {
+        if (lastUserId.isPresent() && step.getUserId().equals(lastUserId.get())) {
+            logger.info("User couldn't do two steps in row, step: {}", step);
+            return false;
+        }
+
         if (GameState.ACTIVE != state) {
             logger.info("The game is over");
             return false;

@@ -58,12 +58,12 @@ public class GameManagerTest {
     @Test
     public void makeStep() {
         int id = gameManager.createNewGame(USER_ID);
-        UserStep step = new UserStep(3, 4, Game.O);
+        UserStep step = new UserStep(USER_ID, 3, 4, Game.O);
         gameManager.makeStep(id, step);
 
         Assert.assertEquals(null, eventListener.getLastUserStep(id));
 
-        step = new UserStep(5, 4, Game.X);
+        step = new UserStep(USER_ID, 5, 4, Game.X);
         gameManager.makeStep(id, step);
 
         Assert.assertEquals(new UserStepEvent(step, GameState.ACTIVE), eventListener.getLastUserStep(id));

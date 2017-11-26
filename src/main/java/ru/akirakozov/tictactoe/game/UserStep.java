@@ -9,11 +9,13 @@ public class UserStep {
     private final int x;
     private final int y;
     private final char symbol;
+    private final String userId;
 
-    public UserStep(int x, int y, char symbol) {
+    public UserStep(String userId, int x, int y, char symbol) {
         this.x = x;
         this.y = y;
         this.symbol = symbol;
+        this.userId = userId;
     }
 
     public char getSymbol() {
@@ -28,6 +30,11 @@ public class UserStep {
         return y;
     }
 
+
+    public String getUserId() {
+        return userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,12 +42,13 @@ public class UserStep {
         UserStep userStep = (UserStep) o;
         return x == userStep.x &&
                 y == userStep.y &&
-                symbol == userStep.symbol;
+                symbol == userStep.symbol &&
+                Objects.equals(userId, userStep.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, symbol);
+        return Objects.hash(x, y, symbol, userId);
     }
 
     @Override
@@ -49,6 +57,7 @@ public class UserStep {
                 "x=" + x +
                 ", y=" + y +
                 ", symbol=" + symbol +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

@@ -72,8 +72,11 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/make-step")
-    public String makeStep(int gameId, int x, int y, char symbol) {
-        gameManager.makeStep(gameId, new UserStep(x, y, symbol));
+    public String makeStep(
+            @CookieValue(value = COOKIE_USER_ID) String userId,
+            int gameId, int x, int y, char symbol)
+    {
+        gameManager.makeStep(gameId, new UserStep(userId, x, y, symbol));
         return "OK";
     }
 

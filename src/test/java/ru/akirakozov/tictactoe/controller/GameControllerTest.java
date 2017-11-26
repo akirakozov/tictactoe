@@ -94,9 +94,9 @@ public class GameControllerTest {
 
     @Test
     public void makeStep() {
-        gameController.makeStep(23, 1, 3, Game.X);
+        gameController.makeStep(USER_ID, 23, 1, 3, Game.X);
 
-        Mockito.verify(gameManager).makeStep(23, new UserStep(1, 3, Game.X));
+        Mockito.verify(gameManager).makeStep(23, new UserStep(USER_ID, 1, 3, Game.X));
     }
 
     private Game createNewGameForTest(int id) {
