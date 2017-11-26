@@ -58,7 +58,7 @@ public class GameController {
             @CookieValue(value = COOKIE_USER_ID, required = false) String userId,
             ModelMap model, Integer id)
     {
-        if (userId == null) {
+        if (userId == null || gameManager.getGame(id) == null) {
             return REDIRECT_TO_GAMES_PATH;
         }
 
