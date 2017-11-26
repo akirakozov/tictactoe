@@ -3,6 +3,7 @@ package ru.akirakozov.tictactoe.game;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.akirakozov.tictactoe.game.event.UserStepEvent;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -65,7 +66,7 @@ public class GameManagerTest {
         step = new UserStep(5, 4, Game.X);
         gameManager.makeStep(id, step);
 
-        Assert.assertEquals(step, eventListener.getLastUserStep(id));
+        Assert.assertEquals(new UserStepEvent(step, GameState.ACTIVE), eventListener.getLastUserStep(id));
     }
 
 }

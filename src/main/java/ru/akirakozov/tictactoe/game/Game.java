@@ -1,6 +1,7 @@
 package ru.akirakozov.tictactoe.game;
 
 import ru.akirakozov.tictactoe.game.event.EventListener;
+import ru.akirakozov.tictactoe.game.event.UserStepEvent;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -63,7 +64,7 @@ public class Game {
             lastStepTimestamp = Instant.now();
             stepNumber++;
             state = winChecker.getNewStatus(board, step.getX(), step.getY(), stepNumber);
-            eventListener.onMakeStep(id, step);
+            eventListener.onMakeStep(id, new UserStepEvent(step, state));
             eventListener.onGameStatusChanged(id, getStatus());
         }
     }

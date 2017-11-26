@@ -1,6 +1,7 @@
 package ru.akirakozov.tictactoe.game;
 
 import ru.akirakozov.tictactoe.game.event.EventListener;
+import ru.akirakozov.tictactoe.game.event.UserStepEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +10,11 @@ import java.util.Map;
  * @author akirakozov
  */
 public class RememberLastEventListener implements EventListener {
-    private final Map<Integer, UserStep> lastUserSteps = new HashMap<>();
+    private final Map<Integer, UserStepEvent> lastUserSteps = new HashMap<>();
     private final Map<Integer, GameStatus> lastGameStatuses = new HashMap<>();
 
     @Override
-    public void onMakeStep(int gameId, UserStep userStep) {
+    public void onMakeStep(int gameId, UserStepEvent userStep) {
         lastUserSteps.put(gameId, userStep);
     }
 
@@ -22,7 +23,7 @@ public class RememberLastEventListener implements EventListener {
         lastGameStatuses.put(gameId, gameStatus);
     }
 
-    public UserStep getLastUserStep(int gameId) {
+    public UserStepEvent getLastUserStep(int gameId) {
         return lastUserSteps.get(gameId);
     }
 

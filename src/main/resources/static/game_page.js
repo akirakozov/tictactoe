@@ -1,20 +1,28 @@
 var X = 'x'
 var O = 'o'
 var curSymbol = X;
+var gameState;
 
 function addClickCallback() {
     document.querySelector('#board').onclick = function(ev) {
         var row = ev.target.parentElement.rowIndex;
         var col = ev.target.cellIndex;
         var cellVal = ev.target.innerHTML;
-        if (cellVal != X && cellVal != O) {
+        if (cellVal != X && cellVal != O && gameState != "FINISHED") {
             makeStep(row, col);
         }
     }
 }
 
+function updateStatus(curSymbol, state) {
+    gameState = state;
+    var text = state === "ACTIVE" ? "Next step: " + curSymbol : "The game is over";
+    $("#game-status").html("<p>" + text + "</p>");
+}
+
 function updateCell(message) {
     curSymbol = message.symbol === X ? O : X;
+    updateStatus(curSymbol, message.state);
     $('#board tr:eq(' + message.x + ') td:eq(' + message.y + ')').html(message.symbol);
 }
 
@@ -27,7 +35,8 @@ function makeStep(x, y) {
 }
 
 function updateCurrentSymbol() {
-    curSymbol = $('#gameId').attr("step-number") % 2 === 0 ? X : O
+    curSymbol = $('#gameId').attr("step-number") % 2 === 0 ? X : O;
+    updateStatus(curSymbol, $('#gameId').attr("state"));
 }
 
 function onWindowLoad() {

@@ -3,6 +3,7 @@ package ru.akirakozov.tictactoe.game;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.akirakozov.tictactoe.game.event.UserStepEvent;
 
 /**
  * @author akirakozov
@@ -44,7 +45,7 @@ public class GameTest {
     public void makeStep() {
         UserStep step = new UserStep(3, 5, Game.X);
         game.makeStep(step);
-        Assert.assertEquals(step, eventListener.getLastUserStep(GAME_ID));
+        Assert.assertEquals(new UserStepEvent(step, GameState.ACTIVE), eventListener.getLastUserStep(GAME_ID));
         Assert.assertEquals(GameState.ACTIVE, eventListener.getLastGameStatus(GAME_ID).getState());
     }
 

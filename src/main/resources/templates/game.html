@@ -16,9 +16,11 @@
 <body>
     <div id="connect-status"/>
 
-    <div id="gameId" th:value="${gameId}" th:attr="step-number=${boardState.stepNumber}">
+    <div id="gameId" th:value="${gameId}" th:attr="step-number=${boardState.stepNumber},state=${boardState.state}">
         <h3 th:text="${'Game ' + gameId}"/>
     </div>
+
+    <div id="game-status"/>
 
     <div>
         <table id="board">

@@ -2,7 +2,6 @@ package ru.akirakozov.tictactoe.game.event;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import ru.akirakozov.tictactoe.game.GameStatus;
-import ru.akirakozov.tictactoe.game.UserStep;
 
 /**
  * @author akirakozov
@@ -15,7 +14,7 @@ public class WebSocketSenderEventListener implements EventListener {
     }
 
     @Override
-    public void onMakeStep(int gameId, UserStep userStep) {
+    public void onMakeStep(int gameId, UserStepEvent userStep) {
         template.convertAndSend("/game/" + gameId, userStep);
     }
 
