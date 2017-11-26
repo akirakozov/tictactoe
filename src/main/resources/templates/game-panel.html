@@ -3,6 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Tic-tac-toe game</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/game_panel_page.css" rel="stylesheet"/>
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -31,7 +32,7 @@
             <td th:text="${game.id}"></td>
             <td th:text="${game.playersCount}"></td>
             <td th:text="${game.state}"></td>
-            <td><a th:href="@{/game(id=${game.id})}">Enter</a>
+            <td><a th:href="@{/game(id=${game.id})}">Enter game</a>
             </td>
         </tr>
         </th:block>

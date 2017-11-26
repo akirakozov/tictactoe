@@ -4,7 +4,7 @@ function updateGameStatus(message) {
             "<td>" + message.id + "</td>" +
             "<td>" + message.playersCount + "</td>" +
             "<td>" + message.state + "</td>" +
-            "<td><a href=\"/game?id=" + message.id + "\">Enter</a></td>";
+            "<td><a href=\"/game?id=" + message.id + "\">Enter game</a></td>";
 
     if (statusEl.length) {
         statusEl.html(statusHtml);
