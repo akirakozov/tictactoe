@@ -42,4 +42,13 @@ public class UserStep {
     public int hashCode() {
         return Objects.hash(x, y, symbol);
     }
+
+    @Override
+    public String toString() {
+        return "UserStep{" +
+                "x=" + x +
+                ", y=" + y +
+                ", symbol=" + symbol +
+                '}';
+    }
 }

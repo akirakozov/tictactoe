@@ -1,5 +1,7 @@
 package ru.akirakozov.tictactoe.game;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.akirakozov.tictactoe.game.event.EventListener;
 import ru.akirakozov.tictactoe.game.event.UserStepEvent;
 
@@ -12,6 +14,8 @@ import java.util.Set;
  * @author akirakozov
  */
 public class Game {
+    private static final Logger logger = LoggerFactory.getLogger(Game.class);
+
     private static final char EMPTY_SYMBOL = ' ';
     public static final char X = 'x';
     public static final char O = 'o';
@@ -71,18 +75,22 @@ public class Game {
 
     boolean isValidStep(UserStep step) {
         if (GameState.ACTIVE != state) {
+            logger.info("The game is over");
             return false;
         }
 
         if (!isValidCoord(step.getX()) || !isValidCoord(step.getY())) {
+            logger.info("Invalid coordinates in step: {}", step);
             return false;
         }
 
         if (!isValidSymbol(step.getSymbol())) {
+            logger.info("Invalid symbol in step: {}", step);
             return false;
         }
 
         if (board[step.getX()][step.getY()] != EMPTY_SYMBOL) {
+            logger.info("Field is filled, step: {}", step);
             return false;
         }
 
