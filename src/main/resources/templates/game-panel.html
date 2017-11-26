@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Tic-tac-toe game</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+    <script src="/common.js"></script>
+    <script type="text/javascript">
+        window.onload = onWindowLoad;
+    </script>
+</head>
+<body>
+    <a id="create_game" href="/create-game">New game</a>
+    <br/>
+    <br/>
+    <table id="games">
+        <tr>
+            <th>Game#</th>
+            <th>Players</th>
+            <th>Status</th>
+        </tr>
+        <th:block th:each="game : ${games}">
+        <tr th:id="${'game_' + game.id}">
+            <td th:text="${game.id}"></td>
+            <td th:text="${game.playersCount}"></td>
+            <td th:text="${game.state}"></td>
+            <td><a th:href="@{/game(id=${game.id})}">Enter</a>
+            </td>
+        </tr>
+        </th:block>
+    </table>
+</body>
+</html>

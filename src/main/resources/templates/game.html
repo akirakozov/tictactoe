@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Tic-tac-toe game</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/game_page.css" rel="stylesheet"/>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/game_page.js"></script>
+    <script src="/common.js"></script>
+    <script type="text/javascript">
+        window.onload = onWindowLoad;
+    </script>
+</head>
+<body>
+    <div id="gameId" th:value="${gameId}" th:attr="step-number=${boardState.stepNumber}">
+        <h3 th:text="${'Game ' + gameId}"/>
+    </div>
+    <div>
+        <table id="board">
+            <th:block th:each="i: ${#numbers.sequence(0, boardState.boardSize - 1)}">
+            <tr>
+                <th:block th:each="j: ${#numbers.sequence(0, boardState.boardSize - 1)}">
+                <td th:text="${boardState.board[i][j]}"/>
+                </th:block>
+            </tr>
+            </th:block>
+        </table>
+    </div>
+    <div><a href="/games">Back</a></div>
+</body>
+</html>
