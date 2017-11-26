@@ -14,5 +14,5 @@ function updateGameStatus(message) {
 }
 
 function onWindowLoad() {
-    connect('/game-panel', updateGameStatus);
+    connect('/game-panel', updateGameStatus, onWSCloseHandler);
 }

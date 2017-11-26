@@ -14,9 +14,12 @@
     </script>
 </head>
 <body>
+    <div id="connect-status"/>
+
     <div id="gameId" th:value="${gameId}" th:attr="step-number=${boardState.stepNumber}">
         <h3 th:text="${'Game ' + gameId}"/>
     </div>
+
     <div>
         <table id="board">
             <th:block th:each="i: ${#numbers.sequence(0, boardState.boardSize - 1)}">
@@ -28,6 +31,7 @@
             </th:block>
         </table>
     </div>
+
     <div><a href="/games">Back</a></div>
 </body>
 </html>
