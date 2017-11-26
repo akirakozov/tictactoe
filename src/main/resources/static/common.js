@@ -18,19 +18,3 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
-
-function getUserId() {
-    var idName = "tictactoeUserId";
-    var id = sessionStorage.getItem(idName);
-    if (id === null) {
-        var response = $.get("/create-user-id",
-            function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
-            });
-        alert(response.responseText);
-        sessionStorage.setItem(idName, id);
-        return id;
-    } else {
-        return id;
-    }
-}
