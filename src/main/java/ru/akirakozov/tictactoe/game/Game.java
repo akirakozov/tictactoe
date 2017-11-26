@@ -21,6 +21,7 @@ public class Game {
     private final char board[][];
     private final Set<String> activeUserIds;
     private final EventListener eventListener;
+    private final WinChecker winChecker;
 
     private GameState state;
     private Instant lastStepTimestamp;
@@ -32,6 +33,7 @@ public class Game {
         this.board = createEmptyBoard();
         this.state = GameState.ACTIVE;
         this.stepNumber = 0;
+        this.winChecker = new WinChecker();
         this.lastStepTimestamp = Instant.now();
         this.lastUserId = Optional.empty();
         this.activeUserIds = new HashSet<>();
@@ -60,12 +62,17 @@ public class Game {
             board[step.getX()][step.getY()] = step.getSymbol();
             lastStepTimestamp = Instant.now();
             stepNumber++;
+            state = winChecker.getNewStatus(board, step.getX(), step.getY(), stepNumber);
             eventListener.onMakeStep(id, step);
             eventListener.onGameStatusChanged(id, getStatus());
         }
     }
 
     boolean isValidStep(UserStep step) {
+        if (GameState.ACTIVE != state) {
+            return false;
+        }
+
         if (!isValidCoord(step.getX()) || !isValidCoord(step.getY())) {
             return false;
         }
