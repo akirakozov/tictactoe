@@ -26,12 +26,14 @@
             <th>Game#</th>
             <th>Players</th>
             <th>Status</th>
+            <th>Last update time</th>
         </tr>
         <th:block th:each="game : ${games}">
         <tr th:id="${'game_' + game.id}">
             <td th:text="${game.id}"></td>
             <td th:text="${game.playersCount}"></td>
             <td th:text="${game.state}"></td>
+            <td th:text="${#temporals.format(game.lastStepDateTime, 'dd.MM.yyyy, HH:mm:ss')}"></td>
             <td><a th:href="@{/game(id=${game.id})}">Enter game</a>
             </td>
         </tr>

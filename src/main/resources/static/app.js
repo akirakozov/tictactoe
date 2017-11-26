@@ -1,9 +1,16 @@
+function toDateTime(epochSecond) {
+    var dateTime = new Date(null)
+    dateTime.setSeconds(epochSecond);
+    return dateTime.toLocaleString();
+}
+
 function updateGameStatus(message) {
     var statusEl = $("#game_" + message.id);
     var statusHtml =
             "<td>" + message.id + "</td>" +
             "<td>" + message.playersCount + "</td>" +
             "<td>" + message.state + "</td>" +
+            "<td>" + toDateTime(message.lastStepTime.epochSecond) + "</td>" +
             "<td><a href=\"/game?id=" + message.id + "\">Enter game</a></td>";
 
     if (statusEl.length) {

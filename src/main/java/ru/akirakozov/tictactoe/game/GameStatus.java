@@ -1,6 +1,8 @@
 package ru.akirakozov.tictactoe.game;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Objects;
 
 /**
@@ -33,6 +35,10 @@ public class GameStatus {
 
     public Instant getLastStepTime() {
         return lastStepTime;
+    }
+
+    public LocalDateTime getLastStepDateTime() {
+        return LocalDateTime.ofInstant(lastStepTime, ZoneId.of("Europe/Moscow"));
     }
 
     @Override
