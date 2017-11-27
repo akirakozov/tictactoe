@@ -48,7 +48,7 @@ function makeStep(x, y) {
 }
 
 function updateCurrentState() {
-    lastStepNumber = $('#gameId').attr("step-number");
+    lastStepNumber = parseInt($('#gameId').attr("step-number"));
     curSymbol = lastStepNumber % 2 === 0 ? X : O;
     updateStatus(curSymbol, $('#gameId').attr("state"));
 }
@@ -56,5 +56,5 @@ function updateCurrentState() {
 function onWindowLoad() {
     addClickCallback();
     updateCurrentState();
-    connect('/game/' + getGameId(), updateCell);
+    connect('/game/' + getGameId(), updateCell, onWSCloseHandler);
 }

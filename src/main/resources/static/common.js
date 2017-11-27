@@ -13,7 +13,7 @@ function connect(subscriptionId, handler, onCloseHandler) {
     var stompClientOnclose = stompClient.ws.onclose;
     stompClient.ws.onclose = function() {
         console.log("Websocket connection closed and handled from our app.");
-        onWSCloseHandler();
+        onCloseHandler();
         stompClientOnclose();
     };
 }
