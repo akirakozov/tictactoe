@@ -1,4 +1,5 @@
 var stompClient = null;
+var unload = false;
 
 function connect(subscriptionId, handler, onCloseHandler) {
     var socket = new SockJS('/tictactoe');
@@ -13,7 +14,9 @@ function connect(subscriptionId, handler, onCloseHandler) {
     var stompClientOnclose = stompClient.ws.onclose;
     stompClient.ws.onclose = function() {
         console.log("Websocket connection closed and handled from our app.");
-        onCloseHandler();
+        if (!unload) {
+            onCloseHandler();
+        }
         stompClientOnclose();
     };
 }
@@ -29,3 +32,9 @@ function disconnect() {
     }
     console.log("Disconnected");
 }
+
+function onWindowUnload() {
+    unload = true;
+}
+
+window.onunload = onWindowUnload()
