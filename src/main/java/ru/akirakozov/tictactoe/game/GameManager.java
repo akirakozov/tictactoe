@@ -3,6 +3,7 @@ package ru.akirakozov.tictactoe.game;
 import ru.akirakozov.tictactoe.game.event.EventListener;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class GameManager {
     private final AtomicInteger nextGameId = new AtomicInteger(1);
-    private final ConcurrentHashMap<Integer, Game> gamesMap = new ConcurrentHashMap<>();
+    private final Map<Integer, Game> gamesMap = new ConcurrentHashMap<>();
     private final EventListener gameEventListener;
 
     public GameManager(EventListener gameEventListener) {
@@ -28,8 +29,8 @@ public class GameManager {
     public int createNewGame(String userId) {
         int id = nextGameId.getAndIncrement();
         Game game = new Game(id, gameEventListener);
-        gamesMap.put(id, game);
         game.addUser(userId);
+        gamesMap.put(id, game);
         return id;
     }
 
