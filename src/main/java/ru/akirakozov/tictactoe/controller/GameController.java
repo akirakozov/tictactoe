@@ -49,6 +49,7 @@ public class GameController {
             ModelMap model)
     {
         setCookie(userId, response);
+        addNoStoreHeader(response);
         model.put("games", gameManager.getGamesStatuses());
         return "game-panel";
     }
@@ -56,12 +57,14 @@ public class GameController {
     @GetMapping("/game")
     public String getGame(
             @CookieValue(value = COOKIE_USER_ID, required = false) String userId,
+            HttpServletResponse response,
             ModelMap model, Integer id)
     {
         if (userId == null || gameManager.getGame(id) == null) {
             return REDIRECT_TO_GAMES_PATH;
         }
 
+        addNoStoreHeader(response);
         gameManager.addUserToGame(id, userId);
 
         Game game = gameManager.getGame(id);
@@ -88,6 +91,10 @@ public class GameController {
         if (userId == null) {
             response.addCookie(new Cookie(COOKIE_USER_ID, generateUserId()));
         }
+    }
+
+    private void addNoStoreHeader(HttpServletResponse response) {
+        response.setHeader("Cache-Control", "no-store");
     }
 
 }

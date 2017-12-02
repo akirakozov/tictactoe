@@ -82,9 +82,10 @@ public class GameControllerTest {
     public void getGame() {
         int id = 34;
         ModelMap model = new ModelMap();
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
         when(gameManager.getGame(id)).thenReturn(createNewGameForTest(id));
-        Assert.assertEquals("game", gameController.getGame(USER_ID, model, 34));
+        Assert.assertEquals("game", gameController.getGame(USER_ID, response, model, 34));
 
         Assert.assertEquals(34, model.get("gameId"));
         BoardState state = (BoardState) model.get("boardState");
